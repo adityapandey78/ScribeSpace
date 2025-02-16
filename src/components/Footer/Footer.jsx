@@ -56,7 +56,7 @@ function Footer() {
                             </a>
                             <div className="flex items-center gap-4 mt-4">
                                 <a 
-                                    href="https://github.com/yourusername" 
+                                    href="" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     className="text-gray-600 hover:text-violet-600 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
@@ -66,7 +66,7 @@ function Footer() {
                                     </svg>
                                 </a>
                                 <a 
-                                    href="https://x.com/yourusername" 
+                                    href="" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     className="text-gray-600 hover:text-violet-600 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
@@ -96,7 +96,7 @@ function Footer() {
                     {/* Social Media Links */}
                     <div className="flex justify-center items-center gap-4">
                         <a 
-                            href="mailto:your.email@example.com" 
+                            href="mailto:adityapandey.2402@gmail.com" 
                             className="text-gray-600 hover:text-violet-600 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
                             aria-label="Email"
                         >
@@ -105,7 +105,7 @@ function Footer() {
                             </svg>
                         </a>
                         <a 
-                            href="https://github.com/yourusername" 
+                            href="https://github.com/adityapandey78" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-gray-600 hover:text-violet-600 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
@@ -116,7 +116,7 @@ function Footer() {
                             </svg>
                         </a>
                         <a 
-                            href="https://linkedin.com/in/yourusername" 
+                            href="https://www.linkedin.com/in/aditya-pandey-1a96b0213/" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-gray-600 hover:text-violet-600 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
@@ -127,7 +127,7 @@ function Footer() {
                             </svg>
                         </a>
                         <a 
-                            href="https://x.com/yourusername" 
+                            href="https://x.com/adityapandey78" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-gray-600 hover:text-violet-600 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"

@@ -22,9 +22,9 @@ export class Service{
     async createPost({title,slug,content,featuredImage,status,userId}){
         try {
             return await this.databases.createDocument(
-                conf.appwriteDatabaseID,  // DB ID
-                conf.appwriteColletionID, // Collection ID
-                slug || ID.unique(), //document Id slug ko le rha hu chahe ho ID.unique() bhi le skte hain
+                conf.appwriteDatabaseID,
+                conf.appwriteColletionID,
+                ID.unique(),
                 {
                     title,
                     content,
@@ -45,21 +45,16 @@ export class Service{
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseID,
                 conf.appwriteColletionID,
-                slug, //doc ID Slug hai mera
+                slug,
                 {
                     title,
                     content,
                     featuredImage,
                     status,
-                    
                 }
-                
-                
             )
-            
         } catch (error) {
             console.log("Appwrite service :: Update Post:: error", error);
-            
         }
     }
 
@@ -80,16 +75,15 @@ export class Service{
     }
 
     async getPost(slug){
-        //get post me bs ek ID chaiye
         try {
             return await this.databases.getDocument(
                 conf.appwriteDatabaseID,
                 conf.appwriteColletionID,
-                slug //slug is Dcoument ID
+                slug
             )
         } catch (error) {
-          console.log("Appwrite Serivce :: getPost:: error",error);
-            return false; //in case kuchh ni mila toh
+            console.log("Appwrite Serivce :: getPost:: error", error);
+            return false;
         }
     }
     //to get all the posts

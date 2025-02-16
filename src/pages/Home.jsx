@@ -246,7 +246,7 @@ function Home() {
                                 </svg>
                             </Link>
                             <a
-                                href="https://github.com/yourusername/project-repo"
+                                href="https://github.com/adityapandey78/ScribeSpace"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="px-8 py-3 bg-gray-900 dark:bg-gray-800 text-white rounded-full hover:opacity-90 transition-opacity inline-flex items-center justify-center gap-2 border-2 border-transparent hover:border-cyan-500"
