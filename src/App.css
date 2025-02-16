@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Cairo:wght@600&display=swap');
+
+#root {
+  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive container widths */
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* Remove default logo styles */
+.logo {
+  height: auto;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  p {
+    font-size: 0.875rem;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better mobile touch handling */
+@media (max-width: 640px) {
+  button, 
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Remove animations if user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Better dark mode handling */
+@media (prefers-color-scheme: dark) {
+  body {
+    color-scheme: dark;
+  }
+}
+
+/* Improved focus styles */
+:focus-visible {
+  outline: 2px solid #646cff;
+  outline-offset: 2px;
+}
+
+/* Remove default card styles */
+.card {
+  padding: 0;
+  background: none;
+}
+
+/* Better image handling */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Improved form element spacing on mobile */
+@media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    margin-bottom: 1rem;
+  }
+}
+
+/* Prevent content shift on load */
+main {
+  min-height: calc(100vh - 64px - 200px); /* Adjust based on header/footer height */
+}
+
+/* Improved container padding on mobile */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Add these styles for better content layout */
+.prose-container {
+    max-width: 728px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+@media (max-width: 728px) {
+    .prose-container {
+        padding: 0 16px;
+    }
+}
+
+/* Better blockquote styling */
+.prose blockquote {
+    font-style: italic;
+    margin: 2em 0;
+    padding-left: 1.5em;
+    border-left: 4px solid #3b82f6;
+    color: #4b5563;
+}
+
+/* Better code block styling */
+.prose pre {
+    margin: 2em 0;
+    padding: 1.5em;
+    border-radius: 8px;
+}
+
+/* Better image styling */
+.prose img {
+    border-radius: 8px;
+    margin: 2em 0;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
