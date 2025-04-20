@@ -27,7 +27,7 @@ export default function Post() {
     },[slug,navigate])
     //ffetching the image preview
     const fetchImagePreview = async (fileId) => {
-        const previewUrl = await service.getFilePreview(fileId);
+        const previewUrl = await service.getFileView(fileId);
         setImageSrc(previewUrl);
     };
     const deletePost=()=>{

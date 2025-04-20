@@ -10,7 +10,7 @@ function PostCard({ $id, title, featuredImage, userId, $createdAt }) {
   
   useEffect(() => {
     const fetchImage = async () => {
-      const image = await service.getFilePreview(featuredImage)
+      const image = await service.getFileView(featuredImage)
       setImgSrc(image)
     }
     fetchImage()
