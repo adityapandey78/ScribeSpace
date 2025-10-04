@@ -140,10 +140,55 @@ export class Service{
             const result= this.bucket.getFileView(
                 conf.appwriteBucketID,
                 fileId);
-        return result.href;
+            // result may be a promise that resolves to an object with href
+            // await if it's a promise
+            const resolved = await result;
+            if (resolved && resolved.href) return resolved.href;
+            if (typeof resolved === 'string') return resolved;
+            if (resolved && resolved.url) return resolved.url;
+            if (resolved && typeof resolved.toString === 'function') return resolved.toString();
+
+            // Fallback: construct a URL using configured endpoint — useful if SDK call fails
+            const base = (conf.appwriteUrl || '').replace(/\/+$/,'');
+            const project = encodeURIComponent(conf.appwriteProjectID || '');
+            const bucket = encodeURIComponent(conf.appwriteBucketID || '');
+            const fid = encodeURIComponent(fileId || '');
+            if (base && bucket && fid) {
+                // Appwrite storage view endpoint format: {endpoint}/storage/buckets/{bucketId}/files/{fileId}/view?project={projectId}
+                return `${base.replace(/\/v1$/,'')}/v1/storage/buckets/${bucket}/files/${fid}/view?project=${project}`;
+            }
+            return '';
               
         } catch (error) {
             console.log("Appwrite Services :: getFileView():: error", error);
+            return '';
+        }
+    }
+
+    async getFilePreview(fileId) {
+        try {
+            const result = this.bucket.getFilePreview(
+                conf.appwriteBucketID,
+                fileId
+            );
+            const resolved = await result;
+            if (resolved && resolved.href) return resolved.href;
+            if (typeof resolved === 'string') return resolved;
+            if (resolved && resolved.url) return resolved.url;
+            if (resolved && typeof resolved.toString === 'function') return resolved.toString();
+
+            // Fallback: construct preview URL
+            const base = (conf.appwriteUrl || '').replace(/\/+$/,'');
+            const project = encodeURIComponent(conf.appwriteProjectID || '');
+            const bucket = encodeURIComponent(conf.appwriteBucketID || '');
+            const fid = encodeURIComponent(fileId || '');
+            if (base && bucket && fid) {
+                // Appwrite storage preview endpoint format: {endpoint}/storage/buckets/{bucketId}/files/{fileId}/preview?project={projectId}
+                return `${base.replace(/\/v1$/,'')}/v1/storage/buckets/${bucket}/files/${fid}/preview?project=${project}`;
+            }
+            return '';
+        } catch (error) {
+            console.log("Appwrite Services :: getFilePreview():: error", error);
             return '';
         }
     }

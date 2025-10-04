@@ -27,8 +27,15 @@ export default function Post() {
     },[slug,navigate])
     //ffetching the image preview
     const fetchImagePreview = async (fileId) => {
-        const previewUrl = await service.getFileView(fileId);
-        setImageSrc(previewUrl);
+        try {
+            const previewUrl = await service.getFilePreview
+                ? await service.getFilePreview(fileId)
+                : await service.getFileView(fileId);
+            setImageSrc(previewUrl || '');
+        } catch (err) {
+            console.error('Error fetching preview', err);
+            setImageSrc('');
+        }
     };
     const deletePost=()=>{
         service.deletePost(post.$id).then((status)=>{

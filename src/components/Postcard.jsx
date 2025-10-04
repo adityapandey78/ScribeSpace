@@ -10,8 +10,13 @@ function PostCard({ $id, title, featuredImage, userId, $createdAt }) {
   
   useEffect(() => {
     const fetchImage = async () => {
-      const image = await service.getFileView(featuredImage)
-      setImgSrc(image)
+      try {
+        const image = await service.getFileView(featuredImage)
+        setImgSrc(image)
+      } catch (err) {
+        console.error('Error fetching image preview', err)
+        setImgSrc('')
+      }
     }
     fetchImage()
   }, [featuredImage])
@@ -21,12 +26,21 @@ function PostCard({ $id, title, featuredImage, userId, $createdAt }) {
       <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-pink-50 via-violet-50 to-purple-50 dark:bg-gray-800 h-full border border-violet-100 dark:border-gray-700/20 transition-all duration-300 group-hover:border-violet-500/50 dark:group-hover:border-cyan-500/50 group-hover:translate-y-[-4px] backdrop-blur-sm">
         {/* Fixed aspect ratio container for image */}
         <div className="relative w-full pt-[56.25%]"> {/* 16:9 aspect ratio */}
-          {imageSrc && (
+          {imageSrc ? (
             <img 
               src={imageSrc} 
               alt={title}
               className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-all duration-500 ease-out"
             />
+          ) : (
+            <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+              {/* simple placeholder */}
+              <svg className="w-12 h-12 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M21 15V7a2 2 0 00-2-2H5a2 2 0 00-2 2v8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 19h18" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="12" cy="11" r="2.5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-violet-900/80 dark:from-black/80 via-violet-900/20 dark:via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
         </div>
