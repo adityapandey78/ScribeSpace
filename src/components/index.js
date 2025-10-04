@@ -12,6 +12,8 @@ import AuthLayout from './AuthLayout'
 import Button from './Button'
 import Input from './Input'
 import Select from './Select'
+import ScrollToTop from './ScrollToTop'
+
 export{
     Header,
     Footer,
@@ -26,6 +28,6 @@ export{
     AuthLayout,
     Button,
     Input,
-    Select
-
+    Select,
+    ScrollToTop
 }

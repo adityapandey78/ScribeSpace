@@ -16,6 +16,9 @@ export default function Post() {
     const isAuthor = post && userData ? post.userId=== userData.$id:false;
 
     useEffect(()=>{
+        // Scroll to top when this page loads
+        window.scrollTo(0, 0);
+        
         if (slug) {
             service.getPost(slug).then((post)=>{
                 if(post) {

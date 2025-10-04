@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux'
 import './App.css'
 import authService from "./appwrite/auth"
 import { login, logout } from './store/authSlice'
-import { Header, Footer } from "./components/index"
+import { Header, Footer, ScrollToTop } from "./components/index"
 import { Outlet } from 'react-router-dom'
 
 function App() {
@@ -45,6 +45,7 @@ function App() {
   // Main application layout with responsive container and decorative elements
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      <ScrollToTop />
       <Header />
       <main className="flex-grow pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
