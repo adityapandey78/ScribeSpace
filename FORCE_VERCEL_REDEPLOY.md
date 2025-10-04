@@ -1,4 +1,14 @@
-# Force Vercel to Deploy Latest Commit
+# Force Vercel Redeploy
+
+**Last Updated:** October 4, 2025 - Force rebuild with latest image fixes
+
+## Latest Changes:
+- Fixed Appwrite image URL generation
+- Added read permissions to uploaded files
+- Improved error handling and logging
+- Added WebP format for optimized images
+
+## Deployment Trigger Count: 3
 
 ## 🚨 Problem: Vercel showing old commit (a209da9) instead of latest (feee591)
 
