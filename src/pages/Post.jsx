@@ -18,22 +18,24 @@ export default function Post() {
     useEffect(()=>{
         if (slug) {
             service.getPost(slug).then((post)=>{
-                if(post) {setPost(post);
-                fetchImagePreview(post.featuredImage);
-            }else navigate('/');
+                if(post) {
+                    setPost(post);
+                    fetchImagePreview(post.featuredImage);
+                } else navigate('/');
             })
         } else navigate('/');
         
     },[slug,navigate])
-    //ffetching the image preview
+    
+    // Fetching the image preview - using getFileView for consistency with Postcard
     const fetchImagePreview = async (fileId) => {
         try {
-            const previewUrl = await service.getFilePreview
-                ? await service.getFilePreview(fileId)
-                : await service.getFileView(fileId);
-            setImageSrc(previewUrl || '');
+            console.log('Fetching image for fileId:', fileId);
+            const imageUrl = await service.getFileView(fileId);
+            console.log('Image URL received:', imageUrl);
+            setImageSrc(imageUrl || '');
         } catch (err) {
-            console.error('Error fetching preview', err);
+            console.error('Error fetching image preview:', err);
             setImageSrc('');
         }
     };
@@ -131,15 +133,30 @@ export default function Post() {
                     </h1>
 
                     {/* Featured Image */}
-                    {imageSrc && (
+                    {imageSrc ? (
                         <div className="mb-8 rounded-2xl overflow-hidden shadow-lg">
                             <img
                                 src={imageSrc}
                                 alt={post.title}
                                 className="w-full h-auto object-cover"
+                                onError={(e) => {
+                                    console.error('Image failed to load:', imageSrc);
+                                    e.target.style.display = 'none';
+                                }}
                             />
                         </div>
-                    )}
+                    ) : post.featuredImage ? (
+                        <div className="mb-8 rounded-2xl overflow-hidden shadow-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center" style={{minHeight: '400px'}}>
+                            <div className="text-center text-gray-400">
+                                <svg className="w-16 h-16 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 15V7a2 2 0 00-2-2H5a2 2 0 00-2 2v8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M3 19h18" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <circle cx="12" cy="11" r="2.5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                                <p className="text-sm">Loading image...</p>
+                            </div>
+                        </div>
+                    ) : null}
 
                     {/* Content with refined styling */}
                     <div className="prose prose-base md:prose-lg max-w-none mx-auto">
