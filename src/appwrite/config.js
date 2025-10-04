@@ -19,7 +19,7 @@ export class Service{
 
     //*Post Upload service
     //Create post method
-    async createPost({title,slug,content,featuredImage,status,userId}){
+    async createPost({title,content,featuredImage,status,userId}){
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseID,
@@ -110,12 +110,13 @@ export class Service{
 
     async uploadFile(file){
         try {
-            return await this.bucket.createFile(
+            const result = await this.bucket.createFile(
                 conf.appwriteBucketID,
                 ID.unique(),
                 file
             )
             console.log("Upload file is  trying to upload the file")
+            return result;
         } catch (error) {
             console.log("Appwrite Services :: uploadFile():: error", error);
             return false;
