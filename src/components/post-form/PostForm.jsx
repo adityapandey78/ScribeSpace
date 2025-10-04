@@ -128,29 +128,29 @@ function PostForm({ post }) {
 
     return (
         <div className="w-full max-w-4xl mx-auto p-6">
-            <div className="bg-white/50 dark:bg-gray-800 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-violet-100 dark:border-gray-700/20">
+            <div className="backdrop-blur-md bg-white/20 dark:bg-gray-900/20 rounded-2xl p-6 lg:p-8 shadow-xl border border-white/20 dark:border-gray-700/20">
                 {/* Status and Error Messages */}
                 {submitStatus && (
-                    <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 rounded-lg">
-                        <div className="flex items-center space-x-2">
+                    <div className="mb-6 p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-purple-500/10 dark:from-cyan-500/5 dark:to-purple-500/5 backdrop-blur-sm border border-cyan-500/20 dark:border-cyan-500/10">
+                        <div className="flex items-center gap-3">
                             {isSubmitting && (
-                                <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <svg className="animate-spin h-5 w-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
                             )}
-                            <span className="font-mono text-sm">{submitStatus}</span>
+                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{submitStatus}</span>
                         </div>
                     </div>
                 )}
                 
                 {submitError && (
-                    <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-300 rounded-lg">
-                        <div className="flex items-center space-x-2">
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/20">
+                        <div className="flex items-center gap-3">
+                            <svg className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <span className="font-mono text-sm">{submitError}</span>
+                            <span className="text-sm text-red-600 dark:text-red-400">{submitError}</span>
                         </div>
                     </div>
                 )}
