@@ -113,12 +113,13 @@ export class Service{
             const result = await this.bucket.createFile(
                 conf.appwriteBucketID,
                 ID.unique(),
-                file
+                file,
+                ['read("any")'] // Allow anyone to read the uploaded file
             )
-            console.log("Upload file is  trying to upload the file")
+            console.log("File uploaded successfully:", result.$id)
             return result;
         } catch (error) {
-            console.log("Appwrite Services :: uploadFile():: error", error);
+            console.error("Appwrite Services :: uploadFile():: error", error);
             return false;
         }
     }
@@ -138,59 +139,62 @@ export class Service{
 
     async getFileView(fileId) {
         try {
-            const result= this.bucket.getFileView(
-                conf.appwriteBucketID,
-                fileId);
-            // result may be a promise that resolves to an object with href
-            // await if it's a promise
-            const resolved = await result;
-            if (resolved && resolved.href) return resolved.href;
-            if (typeof resolved === 'string') return resolved;
-            if (resolved && resolved.url) return resolved.url;
-            if (resolved && typeof resolved.toString === 'function') return resolved.toString();
-
-            // Fallback: construct a URL using configured endpoint — useful if SDK call fails
-            const base = (conf.appwriteUrl || '').replace(/\/+$/,'');
-            const project = encodeURIComponent(conf.appwriteProjectID || '');
-            const bucket = encodeURIComponent(conf.appwriteBucketID || '');
-            const fid = encodeURIComponent(fileId || '');
-            if (base && bucket && fid) {
-                // Appwrite storage view endpoint format: {endpoint}/storage/buckets/{bucketId}/files/{fileId}/view?project={projectId}
-                return `${base.replace(/\/v1$/,'')}/v1/storage/buckets/${bucket}/files/${fid}/view?project=${project}`;
-            }
-            return '';
-              
-        } catch (error) {
-            console.log("Appwrite Services :: getFileView():: error", error);
-            return '';
-        }
-    }
-
-    async getFilePreview(fileId) {
-        try {
-            const result = this.bucket.getFilePreview(
+            // Appwrite SDK's getFileView returns a URL object directly
+            const result = this.bucket.getFileView(
                 conf.appwriteBucketID,
                 fileId
             );
-            const resolved = await result;
-            if (resolved && resolved.href) return resolved.href;
-            if (typeof resolved === 'string') return resolved;
-            if (resolved && resolved.url) return resolved.url;
-            if (resolved && typeof resolved.toString === 'function') return resolved.toString();
-
-            // Fallback: construct preview URL
-            const base = (conf.appwriteUrl || '').replace(/\/+$/,'');
-            const project = encodeURIComponent(conf.appwriteProjectID || '');
-            const bucket = encodeURIComponent(conf.appwriteBucketID || '');
-            const fid = encodeURIComponent(fileId || '');
-            if (base && bucket && fid) {
-                // Appwrite storage preview endpoint format: {endpoint}/storage/buckets/{bucketId}/files/{fileId}/preview?project={projectId}
-                return `${base.replace(/\/v1$/,'')}/v1/storage/buckets/${bucket}/files/${fid}/preview?project=${project}`;
+            
+            // Convert URL object to string
+            if (result && result.href) {
+                return result.href;
             }
-            return '';
+            
+            // Fallback: manually construct the URL
+            const base = conf.appwriteUrl.replace(/\/v1$/, '');
+            return `${base}/v1/storage/buckets/${conf.appwriteBucketID}/files/${fileId}/view?project=${conf.appwriteProjectID}`;
+              
         } catch (error) {
-            console.log("Appwrite Services :: getFilePreview():: error", error);
-            return '';
+            console.error("Appwrite Services :: getFileView():: error", error);
+            // Return fallback URL even on error
+            const base = conf.appwriteUrl.replace(/\/v1$/, '');
+            return `${base}/v1/storage/buckets/${conf.appwriteBucketID}/files/${fileId}/view?project=${conf.appwriteProjectID}`;
+        }
+    }
+
+    async getFilePreview(fileId, width = 800, height = 600) {
+        try {
+            // Appwrite SDK's getFilePreview returns a URL object directly
+            const result = this.bucket.getFilePreview(
+                conf.appwriteBucketID,
+                fileId,
+                width,
+                height,
+                'center', // gravity
+                100, // quality
+                0, // borderWidth
+                '', // borderColor
+                0, // borderRadius
+                1, // opacity
+                0, // rotation
+                'ffffff', // background
+                'webp' // output format
+            );
+            
+            // Convert URL object to string
+            if (result && result.href) {
+                return result.href;
+            }
+            
+            // Fallback: manually construct the preview URL
+            const base = conf.appwriteUrl.replace(/\/v1$/, '');
+            return `${base}/v1/storage/buckets/${conf.appwriteBucketID}/files/${fileId}/preview?project=${conf.appwriteProjectID}&width=${width}&height=${height}&output=webp`;
+            
+        } catch (error) {
+            console.error("Appwrite Services :: getFilePreview():: error", error);
+            // Return fallback URL even on error
+            const base = conf.appwriteUrl.replace(/\/v1$/, '');
+            return `${base}/v1/storage/buckets/${conf.appwriteBucketID}/files/${fileId}/preview?project=${conf.appwriteProjectID}&width=${width}&height=${height}&output=webp`;
         }
     }
 
