@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 function Header() {
   const navigate = useNavigate()
   const authStatus = useSelector((state) => state.auth.status)
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -55,16 +54,9 @@ function Header() {
   ]
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0)
-    }
-    window.addEventListener('scroll', handleScroll)
-    
     // Apply theme whenever it changes
     document.documentElement.classList.toggle('dark', isDarkMode)
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
-
-    return () => window.removeEventListener('scroll', handleScroll)
   }, [isDarkMode])
 
   const toggleTheme = () => {
@@ -72,11 +64,11 @@ function Header() {
   }
 
   return (
-    <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg' 
-        : 'bg-white dark:bg-gray-900'
-    }`}>
+    <header className="fixed w-full top-0 z-50 transition-all duration-300">
+      {/* Clear Glassmorphism Background */}
+      <div className="absolute inset-0 bg-white/20 dark:bg-gray-900/20 backdrop-blur-md border-b border-white/10 dark:border-gray-700/10"></div>
+      
+      <div className="relative">
       <Container>
         <nav className="flex items-center justify-between h-12 py-8">
           {/* Logo Section */}
@@ -152,8 +144,10 @@ function Header() {
         </nav>
       </Container>
 
+      </div>
+      
       {/* Neon Border Effect */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 dark:via-cyan-500/50 to-transparent"></div>
     </header>
   )
 }

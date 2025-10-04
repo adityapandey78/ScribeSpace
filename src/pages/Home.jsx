@@ -128,7 +128,7 @@ function Home() {
             </section>
 
             {/* Features Section with GIFs */}
-            <section id="features" className="py-12 md:py-20 bg-gray-50 dark:bg-gray-800/50">
+            <section id="features" className="py-12 md:py-20 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 dark:from-cyan-500/5 dark:to-purple-500/5">
                 <Container>
                     <div className="max-w-6xl mx-auto text-center mb-8 md:mb-16 px-4">
                         <h2 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-cyan-500 to-purple-500 bg-clip-text text-transparent">
@@ -152,7 +152,7 @@ function Home() {
                                         />
                                     </div>
                                     <div className="p-6 flex flex-col flex-grow items-center justify-center text-center">
-                                        <div className="text-gray-700 dark:text-gray-300 mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                                        <div className="text-gray-200 dark:text-gray-300 mb-4 transform group-hover:scale-110 transition-transform duration-300">
                                             {category.icon}
                                         </div>
                                         <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">

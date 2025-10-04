@@ -3,7 +3,11 @@ import { Logo } from '../index'
 
 function Footer() {
     return (
-        <footer className="py-8 border-t border-violet-100 dark:border-gray-300/10 bg-gradient-to-b from-pink-50/80 via-violet-50/80 to-purple-50/80 dark:from-gray-900 dark:to-gray-900/50">
+        <footer className="relative py-8 mt-16 border-t border-gray-200/50 dark:border-gray-700/50 z-10">
+            {/* Glassmorphism Background */}
+            <div className="absolute inset-0 bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl"></div>
+            
+            <div className="relative">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* Logo & Description */}
@@ -139,6 +143,7 @@ function Footer() {
                         </a>
                     </div>
                 </div>
+            </div>
             </div>
         </footer>
     )
