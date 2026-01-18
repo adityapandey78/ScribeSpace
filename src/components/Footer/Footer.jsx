@@ -100,7 +100,7 @@ function Footer() {
                     {/* Social Media Links */}
                     <div className="flex justify-center items-center gap-4">
                         <a 
-                            href="mailto:adityapandey.2402@gmail.com" 
+                            href="mailto:shiveshkumar822@gmail.com" 
                             className="text-gray-600 hover:text-violet-600 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
                             aria-label="Email"
                         >
@@ -109,7 +109,7 @@ function Footer() {
                             </svg>
                         </a>
                         <a 
-                            href="https://github.com/adityapandey78" 
+                            href="https://github.com/Shivesh7856" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-gray-600 hover:text-violet-600 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
